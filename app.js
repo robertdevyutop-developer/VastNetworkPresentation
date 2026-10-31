@@ -54,6 +54,10 @@ document.addEventListener('keydown', e => {
   if ([' ', 'ArrowRight', 'ArrowDown', 'PageDown', 'Enter'].includes(e.key)) { e.preventDefault(); next(); }
   else if (['ArrowLeft', 'ArrowUp', 'PageUp', 'Backspace'].includes(e.key)) { e.preventDefault(); prev(); }
   else if (e.key === '1') show(2);
+  else if (e.key === '2') show(9);
+  else if (e.key === '3') show(14);
+  else if (e.key === '4') show(23);
+  else if (e.key === '1') show(2);
   else if (e.key === 'a') show(0);
   else if (e.key === 'd') show(slides.length - 1);
   else if (e.key === 'f' || e.key === 'F') document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
