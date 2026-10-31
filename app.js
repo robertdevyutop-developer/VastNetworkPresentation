@@ -55,13 +55,13 @@ document.addEventListener('keydown', e => {
   else if (['ArrowLeft', 'ArrowUp', 'PageUp', 'Backspace'].includes(e.key)) { e.preventDefault(); prev(); }
   else if (['1', '2', '3', '4'].includes(e.key)) {
   const pages = {
-    '1': 2,
-    '2': 9,
-    '3': 14,
-    '4': 23
+    '1': 3,
+    '2': 10,
+    '3': 15,
+    '4': 24
   };
 
-  show(pages[e.key]);
+  show(pages[e.key] - 1);
 }
   else if (e.key === 'a') show(0);
   else if (e.key === 'd') show(slides.length - 1);
