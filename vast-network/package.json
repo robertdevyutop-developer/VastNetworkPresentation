@@ -1,0 +1,8 @@
+{
+  "name": "the-vast-network",
+  "version": "1.0.0",
+  "description": "Interactive IT2221 networking presentation (HTML, CSS, Node.js)",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=16" }
+}
