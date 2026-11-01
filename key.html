@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Key Answer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Sora:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="page.css">
+</head>
+<body>
+<div class="orb o1"></div><div class="orb o2"></div>
+<section id="gate" class="panel gate">
+  <div class="badge">&#128273;</div>
+  <h1>Answer Key</h1>
+  <p class="muted">Enter the password to view the key answer.</p>
+  <input type="password" placeholder="Password" autocomplete="off">
+  <button class="btn">Unlock</button>
+  <p class="err"></p>
+</section>
+
+<main id="app" class="panel wide" hidden></main>
+
+<script src="data.js"></script>
+<script src="page.js"></script>
+<script>
+  // ===== PASSWORD for this page (change it here if needed) =====
+  const KEY_PASSWORD = "quizkey";
+
+  const L = 'ABCD';
+  function show() {
+    const chips = [...QUIZ.key].map((a, i) => `<div class="kchip" style="--i:${i}"><b>${i + 1}</b><span>${a}</span></div>`).join('');
+    const items = QUIZ.q.map(([q, ...c], i) => {
+      const k = L.indexOf(QUIZ.key[i]);
+      return `<div class="kitem"><p><b>${i + 1}.</b> ${q}</p><p class="muted">Answer: <em>${L[k]}. ${c[k]}</em></p></div>`;
+    }).join('');
+    document.getElementById('app').innerHTML =
+      `<h1>Answer Key</h1><h2>${QUIZ.title} (${QUIZ.sub})</h2><div class="kgrid">${chips}</div>${items}`;
+  }
+  initGate({ password: KEY_PASSWORD, onUnlock: show });
+</script>
+<script src="menu.js"></script>
+</body>
+</html>

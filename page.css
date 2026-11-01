@@ -1,0 +1,55 @@
+/* Shared styles for Energizer, Assessment and Key Answer pages */
+html,body{height:auto;min-height:100%;overflow-y:auto;cursor:auto;user-select:text}
+body{display:grid;place-items:center;padding:13vh 5vw 8vh;min-height:100vh}
+.panel{position:relative;width:min(780px,100%);padding:clamp(1.4rem,3.5vw,2.6rem);border-radius:20px;border:1px solid rgba(34,230,255,.28);background:linear-gradient(145deg,rgba(11,19,36,.88),rgba(18,12,40,.82));backdrop-filter:blur(10px);box-shadow:0 0 50px rgba(139,92,255,.2);animation:in .8s cubic-bezier(.2,.8,.2,1) both}
+.panel.wide{width:min(980px,100%)}
+.panel h1{font:700 clamp(1.8rem,4vw,3rem)/1.1 "Chakra Petch",sans-serif;background:linear-gradient(100deg,var(--c),var(--v) 50%,var(--m));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:.4em}
+.panel h2{font-size:clamp(1.15rem,2.2vw,1.6rem);margin-bottom:1em}
+.panel p{margin-bottom:1em;color:var(--t)}.muted{color:var(--dim)!important}
+.badge{display:inline-grid;place-items:center;width:64px;height:64px;border-radius:18px;border:1px solid var(--c);color:var(--c);font-size:1.7rem;margin-bottom:1em;box-shadow:0 0 22px rgba(34,230,255,.4);animation:pulse 2.6s ease-in-out infinite}
+.btn{display:inline-block;padding:.75em 1.6em;border-radius:12px;border:1px solid var(--c);background:rgba(34,230,255,.12);color:#fff;font:600 1em "Chakra Petch",sans-serif;text-decoration:none;cursor:pointer;box-shadow:0 0 16px rgba(34,230,255,.35);transition:transform .2s,box-shadow .3s,background .3s}
+.btn:hover{transform:translateY(-2px);background:rgba(34,230,255,.24);box-shadow:0 0 28px rgba(34,230,255,.7)}
+.btn.ghost{border-color:rgba(139,92,255,.6);background:transparent;box-shadow:none}
+.btn.disabled,.btn:disabled{opacity:.4;pointer-events:none}
+
+/* password gate */
+.gate{text-align:center}
+.gate input{display:block;width:min(100%,340px);margin:1.2em auto 1em;padding:.8em 1em;border-radius:12px;border:1px solid rgba(34,230,255,.4);background:rgba(5,9,19,.8);color:#fff;font:1em Sora,sans-serif;text-align:center;letter-spacing:.15em;outline:none}
+.gate input:focus{border-color:var(--m);box-shadow:0 0 18px rgba(255,61,242,.45)}
+.err{min-height:1.5em;color:#ff6b8b;margin-top:.9em!important}
+.shake{animation:shake .45s}
+@keyframes shake{20%,60%{transform:translateX(-10px)}40%,80%{transform:translateX(10px)}}
+
+/* quiz */
+.qpage{animation:in .6s cubic-bezier(.2,.8,.2,1) both}
+.qpage.back{animation-name:inb}
+.qhead{display:flex;justify-content:space-between;color:var(--dim);font-size:.9em;margin-bottom:.6em}
+.pbar{height:6px;border-radius:6px;background:rgba(139,92,255,.2);margin-bottom:1.6em;overflow:hidden}
+.pbar i{display:block;height:100%;background:linear-gradient(90deg,var(--c),var(--m));box-shadow:0 0 12px var(--m);transition:width .5s}
+.opts{display:grid;gap:.7em;margin-bottom:1.6em}
+.opt{display:flex;gap:1em;align-items:center;text-align:left;padding:.9em 1.1em;border-radius:14px;border:1px solid rgba(34,230,255,.25);background:rgba(11,19,36,.7);color:var(--t);font:1em/1.4 Sora,sans-serif;cursor:pointer;transition:transform .2s,border-color .2s,background .2s,box-shadow .3s}
+.opt b{flex:none;display:grid;place-items:center;width:2.2em;height:2.2em;border-radius:50%;border:1px solid var(--c);color:var(--c);font-family:"Chakra Petch",sans-serif}
+.opt:hover{transform:translateX(6px);border-color:var(--c)}
+.opt.sel{border-color:var(--m);background:rgba(255,61,242,.14);box-shadow:0 0 22px rgba(255,61,242,.4)}
+.opt.sel b{background:var(--m);border-color:var(--m);color:#050913}
+.nav{display:flex;justify-content:space-between;gap:1em;margin-bottom:1.4em}
+.dots{display:flex;flex-wrap:wrap;gap:.4em;justify-content:center}
+.dots button{width:2.1em;height:2.1em;border-radius:8px;border:1px solid rgba(139,92,255,.4);background:transparent;color:var(--dim);font:600 .8em "Chakra Petch",sans-serif;cursor:pointer}
+.dots button.done{border-color:var(--c);color:var(--c)}
+.dots button.cur{background:var(--m);border-color:var(--m);color:#050913;box-shadow:0 0 14px var(--m)}
+.score{font:700 clamp(3rem,10vw,6rem)/1 "Chakra Petch",sans-serif;color:#fff;text-shadow:0 0 30px var(--m);margin:.2em 0}
+.links button{background:none;border:0;color:var(--c);text-decoration:underline;font:inherit;cursor:pointer;margin-right:.5em}
+
+/* answer key */
+.kgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:.7em;margin-bottom:2em}
+.kchip{display:flex;justify-content:space-between;align-items:center;padding:.6em .9em;border-radius:12px;border:1px solid rgba(34,230,255,.3);background:rgba(34,230,255,.07);animation:in .6s both;animation-delay:calc(var(--i)*35ms)}
+.kchip span{font:700 1.3em "Chakra Petch",sans-serif;color:var(--m);text-shadow:0 0 12px var(--m)}
+.kitem{padding:.8em 0;border-top:1px solid rgba(139,92,255,.25)}
+.kitem p{margin:0 0 .25em}.kitem em{color:var(--c);font-style:normal;font-weight:600}
+
+/* flashcard style (assessment) */
+.qpage{animation:flip .7s cubic-bezier(.2,.8,.2,1) both}
+.qpage.back{animation-name:flipb}
+@keyframes flip{from{opacity:0;transform:perspective(1200px) rotateY(-70deg) translateX(40px)}}
+@keyframes flipb{from{opacity:0;transform:perspective(1200px) rotateY(70deg) translateX(-40px)}}
+.opt:hover{transform:none;background:rgba(34,230,255,.1)}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Assessment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Sora:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="page.css">
+</head>
+<body>
+<div class="orb o1"></div><div class="orb o2"></div>
+<section id="gate" class="panel gate">
+  <div class="badge">&#128274;</div>
+  <h1>Assessment</h1>
+  <p class="muted">Enter the password to view the assessment.</p>
+  <input type="password" placeholder="Password" autocomplete="off">
+  <button class="btn">Unlock</button>
+  <p class="err"></p>
+</section>
+
+<main id="app" class="panel" hidden></main>
+
+<script src="data.js"></script>
+<script src="page.js"></script>
+<script>
+  // ===== PASSWORD for this page (change it here if needed) =====
+  const ASSESSMENT_PASSWORD = "quiznet";
+
+  // Flashcard style: one card per question. Click a choice to answer, then flip to the next card.
+  const N = QUIZ.q.length, L = 'ABCD';
+  const ans = new Array(N).fill(null);
+  const app = document.getElementById('app');
+
+  function card(i, dir) {                       // i = -1 intro, 0..N-1 question, N = finish
+    if (i === -1) {
+      app.innerHTML = `<div class="qpage ${dir}"><h1>${QUIZ.title}</h1><h2>${QUIZ.sub}</h2>
+        <p><b>Instructions:</b> ${QUIZ.instructions}</p>
+        <button class="btn" id="go">Start</button></div>`;
+      document.getElementById('go').onclick = () => card(0, 'fwd');
+      return;
+    }
+    if (i === N) return finish();
+    const [q, ...c] = QUIZ.q[i];
+    app.innerHTML = `<div class="qpage ${dir}">
+      <div class="qhead"><span>Question ${i + 1} of ${N}</span></div>
+      <div class="pbar"><i style="width:${(i + 1) / N * 100}%"></i></div>
+      <h2>${i + 1}. ${q}</h2>
+      <div class="opts">${c.map((t, k) => `<button class="opt${ans[i] === k ? ' sel' : ''}"><b>${L[k]}</b><span>${t}</span></button>`).join('')}</div>
+      <div class="nav"><button class="btn ghost" id="prev">${i === 0 ? 'Back' : 'Previous'}</button>
+      <button class="btn" id="next">${i === N - 1 ? 'Finish' : 'Next'}</button></div></div>`;
+    app.querySelectorAll('.opt').forEach((b, k) => b.onclick = () => {
+      ans[i] = k;
+      app.querySelectorAll('.opt').forEach((o, j) => o.classList.toggle('sel', j === k));
+    });
+    document.getElementById('prev').onclick = () => card(i - 1, 'back');
+    document.getElementById('next').onclick = () => card(i + 1, 'fwd');
+  }
+
+  function finish() {
+    const score = ans.reduce((s, a, i) => s + (a !== null && L[a] === QUIZ.key[i] ? 1 : 0), 0);
+    const first = ans.indexOf(null);
+    app.innerHTML = `<div class="qpage fwd" style="text-align:center"><h1>Assessment Complete</h1>
+      <p class="muted">Your score</p><div class="score">${score} / ${N}</div>
+      ${first > -1 ? `<p class="muted">Some questions were left unanswered.</p>` : ''}
+      <div class="nav" style="justify-content:center">
+      ${first > -1 ? '<button class="btn ghost" id="un">Go to unanswered</button>' : ''}
+      <button class="btn" id="again">Retake</button></div></div>`;
+    if (first > -1) document.getElementById('un').onclick = () => card(first, 'back');
+    document.getElementById('again').onclick = () => { ans.fill(null); card(-1, 'back'); };
+  }
+
+  initGate({ password: ASSESSMENT_PASSWORD, onUnlock: () => card(-1) });
+</script>
+<script src="menu.js"></script>
+</body>
+</html>

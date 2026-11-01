@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Energizer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Sora:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="page.css">
+</head>
+<body>
+<div class="orb o1"></div><div class="orb o2"></div>
+<main class="panel" style="text-align:center">
+  <div class="badge">&#9889;</div>
+  <h1>Energizer</h1>
+  <p class="muted">Get ready for a quick activity before we continue.</p>
+  <p id="note" class="muted" hidden>No link has been added yet.</p>
+  <a id="energizerLink" class="btn" target="_blank" rel="noopener">Open Energizer</a>
+</main>
+
+
+<script>
+  const ENERGIZER_LINK = "Video.html";   // Energizer link
+</script>
+<script>
+  const a = document.getElementById('energizerLink');
+  if (ENERGIZER_LINK) { a.href = ENERGIZER_LINK; }
+  else { a.classList.add('disabled'); document.getElementById('note').hidden = false; }
+</script>
+<script src="menu.js"></script>
+</body>
+</html>
